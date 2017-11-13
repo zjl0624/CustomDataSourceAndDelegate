@@ -16,15 +16,17 @@
 #import "FirstCollectionViewCell.h"
 #import "CollectionModel.h"
 #import "Delegate.h"
+#import "CustomTableViewDataSource.h"
+#import "CustomTableViewDelegate.h"
 
 @interface TableViewController ()<UITableViewDelegate> {
 	UITableView *tableview;
 	UICollectionView *collectonview;
 	NSMutableArray *dataArray;
 	NSMutableArray *collectionDataArray;
-	DataSource *dataSource;
+	CustomTableViewDataSource *dataSource;
 	DataSource *collectionDataSource;
-	Delegate *tableDelegate;
+	CustomTableViewDelegate *tableDelegate;
 	Delegate *collectDelegate;
 }
 
@@ -61,6 +63,12 @@
 - (void)initTableView {
 	tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight - 64)];
 	[self.view addSubview:tableview];
+	tableview.allowsMultipleSelectionDuringEditing = YES;
+	UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress)];
+	[tableview addGestureRecognizer:longPressGesture];
+	
+	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelEditing)];
+//	[tableview addGestureRecognizer:tapGesture];
 	dataArray = [[NSMutableArray alloc] init];
 	FirstModel *fm1 = [[FirstModel alloc] init];
 	fm1.isRed = YES;
@@ -74,7 +82,7 @@
 	[dataArray addObject:@[sm1,sm2]];
 	[tableview registerClass:[FirstTableViewCell class] forCellReuseIdentifier:@"firstcell"];
 	[tableview registerClass:[SecondTableViewCell class] forCellReuseIdentifier:@"secondcell"];
-	dataSource = [[DataSource alloc] initWithDataArray:dataArray numberOfSection:[dataArray count] cellIDConfigureBlock:^NSString *(NSIndexPath *indexPath, id model) {
+	dataSource = [[CustomTableViewDataSource alloc] initWithDataArray:dataArray numberOfSection:[dataArray count] cellIDConfigureBlock:^NSString *(NSIndexPath *indexPath, id model) {
 		if (indexPath.section == 0 || indexPath.section == 1) {
 			return @"firstcell";
 		}else {
@@ -89,9 +97,19 @@
 		
 	}];
 	tableview.dataSource = dataSource;
-	tableDelegate = [[Delegate alloc] initWithSelectedBlock:^(NSIndexPath *indexPath) {
-		NSLog(@"点了一发");
-	} TableviewCellHeightBlock:nil TableviewSectionHeaderHeightBlock:^CGFloat(NSInteger section) {
+	tableDelegate = [[CustomTableViewDelegate alloc] initWithSelectedBlock:^(NSIndexPath *indexPath) {
+		UITableViewCell *cell = [tableview cellForRowAtIndexPath:indexPath];
+		if (tableview.editing) {
+
+
+		}else {
+			
+			NSLog(@"点了一发");
+		}
+
+	} TableviewCellHeightBlock:^CGFloat(NSIndexPath *indexPath) {
+		return 80;
+	} TableviewSectionHeaderHeightBlock:^CGFloat(NSInteger section) {
 		return 10;
 	} TableviewSectionFooterHeightBlock:^CGFloat(NSInteger section) {
 		return 20;
@@ -113,6 +131,14 @@
 	UIView *view = [[UIView alloc] init];
 	view.backgroundColor = [UIColor greenColor];
 	return view;
+}
+
+- (void)longPress {
+	[tableview setEditing:YES animated:YES];
+}
+
+- (void)cancelEditing {
+	[tableview setEditing:NO animated:YES];
 }
 #pragma mark - CollectionView
 - (void)initCollectionView {

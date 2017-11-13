@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DataSource.h"
 
-@interface CustomTableViewDataSource : NSObject
+@interface CustomTableViewDataSource : DataSource
 
 @end

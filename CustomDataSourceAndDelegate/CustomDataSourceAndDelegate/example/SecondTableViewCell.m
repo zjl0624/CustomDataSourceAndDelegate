@@ -30,7 +30,7 @@
 	self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
 	if (self) {
 		nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
-		[self addSubview:nameLabel];
+		[self.contentView addSubview:nameLabel];
 	}
 	return self;
 }

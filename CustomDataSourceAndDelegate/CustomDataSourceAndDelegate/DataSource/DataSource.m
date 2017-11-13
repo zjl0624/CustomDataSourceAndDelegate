@@ -48,6 +48,11 @@
 	return self;
 }
 
+- (void)setDataArray:(NSArray *)dataArray {
+	_dataArray = dataArray;
+	
+}
+
 - (id)modelByIndex:(NSIndexPath *)indexPath {
 	if (_numberOfSection == 1) {
 		return _dataArray[indexPath.row];

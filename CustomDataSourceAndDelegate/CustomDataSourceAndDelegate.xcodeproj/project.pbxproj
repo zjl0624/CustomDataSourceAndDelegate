@@ -23,6 +23,8 @@
 		5F6297F61FAC474A007E51A1 /* SecondModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F6297EC1FAC474A007E51A1 /* SecondModel.m */; };
 		5F6297F71FAC474A007E51A1 /* SecondTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F6297EE1FAC474A007E51A1 /* SecondTableViewCell.m */; };
 		5F6297F81FAC474A007E51A1 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F6297F01FAC474A007E51A1 /* TableViewController.m */; };
+		5FC9E0D81FB97949008EE96E /* CustomTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9E0D71FB97949008EE96E /* CustomTableViewDataSource.m */; };
+		5FC9E0DB1FB9856E008EE96E /* CustomTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9E0DA1FB9856E008EE96E /* CustomTableViewDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,10 @@
 		5F6297EE1FAC474A007E51A1 /* SecondTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondTableViewCell.m; sourceTree = "<group>"; };
 		5F6297EF1FAC474A007E51A1 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		5F6297F01FAC474A007E51A1 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		5FC9E0D61FB97949008EE96E /* CustomTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewDataSource.h; sourceTree = "<group>"; };
+		5FC9E0D71FB97949008EE96E /* CustomTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewDataSource.m; sourceTree = "<group>"; };
+		5FC9E0D91FB9856E008EE96E /* CustomTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewDelegate.h; sourceTree = "<group>"; };
+		5FC9E0DA1FB9856E008EE96E /* CustomTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +206,10 @@
 				5F6297EE1FAC474A007E51A1 /* SecondTableViewCell.m */,
 				5F6297EF1FAC474A007E51A1 /* TableViewController.h */,
 				5F6297F01FAC474A007E51A1 /* TableViewController.m */,
+				5FC9E0D61FB97949008EE96E /* CustomTableViewDataSource.h */,
+				5FC9E0D71FB97949008EE96E /* CustomTableViewDataSource.m */,
+				5FC9E0D91FB9856E008EE96E /* CustomTableViewDelegate.h */,
+				5FC9E0DA1FB9856E008EE96E /* CustomTableViewDelegate.m */,
 			);
 			path = example;
 			sourceTree = "<group>";
@@ -337,9 +347,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FC9E0DB1FB9856E008EE96E /* CustomTableViewDelegate.m in Sources */,
 				5F6297F81FAC474A007E51A1 /* TableViewController.m in Sources */,
 				5F6297AB1FAC45A4007E51A1 /* AppDelegate.m in Sources */,
 				5F6297F71FAC474A007E51A1 /* SecondTableViewCell.m in Sources */,
+				5FC9E0D81FB97949008EE96E /* CustomTableViewDataSource.m in Sources */,
 				5F6297F41FAC474A007E51A1 /* FirstModel.m in Sources */,
 				5F6297F51FAC474A007E51A1 /* FirstTableViewCell.m in Sources */,
 				5F6297F61FAC474A007E51A1 /* SecondModel.m in Sources */,
@@ -569,6 +581,7 @@
 				5F6297D21FAC45A4007E51A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5F6297D31FAC45A4007E51A1 /* Build configuration list for PBXNativeTarget "CustomDataSourceAndDelegateTests" */ = {
 			isa = XCConfigurationList;
@@ -577,6 +590,7 @@
 				5F6297D51FAC45A4007E51A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5F6297D61FAC45A4007E51A1 /* Build configuration list for PBXNativeTarget "CustomDataSourceAndDelegateUITests" */ = {
 			isa = XCConfigurationList;
@@ -585,6 +599,7 @@
 				5F6297D81FAC45A4007E51A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
