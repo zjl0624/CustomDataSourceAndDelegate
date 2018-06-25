@@ -28,6 +28,7 @@
 	DataSource *collectionDataSource;
 	CustomTableViewDelegate *tableDelegate;
 	Delegate *collectDelegate;
+	NSCache *tableCellHeightCache;
 }
 
 @end
@@ -61,6 +62,7 @@
 }
 #pragma mark - TableView
 - (void)initTableView {
+	tableCellHeightCache = [[NSCache alloc] init];
 	tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight - 64)];
 	[self.view addSubview:tableview];
 	tableview.allowsMultipleSelectionDuringEditing = YES;
@@ -80,6 +82,10 @@
 	SecondModel *sm2 = [[SecondModel alloc] init];
 	sm2.name = @"呵呵";
 	[dataArray addObject:@[sm1,sm2]];
+	[dataArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+		NSCache *rowHeightCache = [[NSCache alloc] init];
+		[tableCellHeightCache setObject:rowHeightCache forKey:@(idx)];
+	}];
 	[tableview registerClass:[FirstTableViewCell class] forCellReuseIdentifier:@"firstcell"];
 	[tableview registerClass:[SecondTableViewCell class] forCellReuseIdentifier:@"secondcell"];
 	dataSource = [[CustomTableViewDataSource alloc] initWithDataArray:dataArray numberOfSection:[dataArray count] cellIDConfigureBlock:^NSString *(NSIndexPath *indexPath, id model) {
@@ -108,7 +114,18 @@
 		}
 
 	} TableviewCellHeightBlock:^CGFloat(NSIndexPath *indexPath) {
-		return 80;
+		NSLog(@"%@",@(indexPath.row));
+		if ([[tableCellHeightCache objectForKey:@(indexPath.section)] objectForKey:@(indexPath.row)]) {
+			return [[[tableCellHeightCache objectForKey:@(indexPath.section)] objectForKey:@(indexPath.row)] floatValue];
+		}else {
+			float h = 80;
+			if (indexPath.row == 0) {
+				h = 160;
+			}
+			[[tableCellHeightCache objectForKey:@(indexPath.section)] setObject:@(h) forKey:@(indexPath.row)];
+			return h;
+		}
+
 	} TableviewSectionHeaderHeightBlock:^CGFloat(NSInteger section) {
 		return 10;
 	} TableviewSectionFooterHeightBlock:^CGFloat(NSInteger section) {
