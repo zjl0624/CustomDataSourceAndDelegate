@@ -281,6 +281,7 @@
 				TargetAttributes = {
 					5F6297A21FAC45A4007E51A1 = {
 						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = XV89F2LKD5;
 						ProvisioningStyle = Automatic;
 					};
 					5F6297BB1FAC45A4007E51A1 = {
@@ -498,7 +499,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = XV89F2LKD5;
 				INFOPLIST_FILE = CustomDataSourceAndDelegate/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = zjl.CustomDataSourceAndDelegate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -509,7 +512,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = XV89F2LKD5;
 				INFOPLIST_FILE = CustomDataSourceAndDelegate/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = zjl.CustomDataSourceAndDelegate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
