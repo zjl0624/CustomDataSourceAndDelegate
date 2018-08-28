@@ -54,11 +54,11 @@
 }
 
 - (id)modelByIndex:(NSIndexPath *)indexPath {
-	if (_numberOfSection == 1) {
+	if (_numberOfSection == 1 && ![_dataArray[indexPath.section] isKindOfClass:[NSArray class]]) {
 		return _dataArray[indexPath.row];
 	}else {
-		NSLog(@"section=%ld",(long)indexPath.section);
-		NSLog(@"row=%ld",(long)indexPath.row);
+//        NSLog(@"section=%ld",(long)indexPath.section);
+//        NSLog(@"row=%ld",(long)indexPath.row);
 		return _dataArray[indexPath.section][indexPath.row];
 	}
 }
@@ -67,7 +67,7 @@
 	return _numberOfSection;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if (_numberOfSection == 1) {
+	if (_numberOfSection == 1 && ![_dataArray[section] isKindOfClass:[NSArray class]]) {
 		return [self.dataArray count];
 	}else {
 		return [_dataArray[section] count];
@@ -93,7 +93,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-	if (_numberOfSection == 1) {
+	if (_numberOfSection == 1 && ![_dataArray[section] isKindOfClass:[NSArray class]]) {
 		return [self.dataArray count];
 	}else {
 		return [_dataArray[section] count];
@@ -104,26 +104,28 @@
 	id model = [self modelByIndex:indexPath];
 	NSString *cellIdentifier = _cellIDConfigureBlock(indexPath,model);
 	id cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    _cellConfigureBlock(indexPath,model,cell);
 	if ([cell conformsToProtocol:@protocol(ConfigureCellDelegate)]) {
 		[cell configureCellWithModel:model];
 	}
-	_cellConfigureBlock(indexPath,model,cell);
+
 	return cell;
 }
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-	UICollectionReusableView *view = [[UICollectionReusableView alloc] init];
+	UICollectionReusableView *view = nil;
 	if (_reusableViewIDConfigureBlock) {
 		NSDictionary *reusableViewIDDict = _reusableViewIDConfigureBlock(indexPath);
 		NSString *reusableViewID = [reusableViewIDDict objectForKey:kind];
-		NSDictionary *reusableViewDict = _reusableViewConfigureBlock(indexPath);
-		UIView *customView = reusableViewDict[kind];
+
+//        UIView *customView = reusableViewDict[kind];
 
 		if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
 			view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:reusableViewID forIndexPath:indexPath];
 		}else if ([kind isEqualToString:UICollectionElementKindSectionFooter]){
 			view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:reusableViewID forIndexPath:indexPath];
 		}
-		[view addSubview:customView];
+        _reusableViewConfigureBlock(indexPath,view,kind);
+//        [view addSubview:customView];
 	}
 	return view;
 }

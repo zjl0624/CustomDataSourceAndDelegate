@@ -183,9 +183,14 @@
 		
 	} ReusableViewIDConfigureBlock:^NSDictionary *(NSIndexPath *indexPath) {
 		return @{UICollectionElementKindSectionHeader:@"header",UICollectionElementKindSectionFooter:@"footer"};
-	} ReusableViewConfigureBlock:^NSDictionary *(NSIndexPath *indexPath) {
-		return @{UICollectionElementKindSectionHeader:[weakself createCollectionHeaderView],UICollectionElementKindSectionFooter:[weakself createCollectionFooterView]};
-	}];
+    } ReusableViewConfigureBlock:^(NSIndexPath *indexPath, UICollectionReusableView *reusableView,NSString *kind) {
+        if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+            [reusableView addSubview:[weakself createCollectionHeaderView]];
+        }else if ([kind isEqualToString:UICollectionElementKindSectionFooter]){
+            [reusableView addSubview:[weakself createCollectionFooterView]];
+        }
+
+    }];
 	collectonview.dataSource = collectionDataSource;
 	collectDelegate = [[Delegate alloc] initWithSelectedBlock:^(NSIndexPath *indexPath) {
 		NSLog(@"点了collectview");

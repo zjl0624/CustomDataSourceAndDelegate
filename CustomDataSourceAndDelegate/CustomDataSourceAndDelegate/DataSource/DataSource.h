@@ -26,7 +26,7 @@ typedef void(^CellConfigureBlock)(NSIndexPath *indexPath,id model,id cell);
 //配置collection header和footer的id，返回的字典格式类似于@{UICollectionElementKindSectionHeader:@"header",UICollectionElementKindSectionFooter:@"footer"}，key必须为UICollectionElementKindSectionHeader，UICollectionElementKindSectionFooter
 typedef NSDictionary *(^ReusableViewIDConfigureBlock)(NSIndexPath *indexPath);
 //配置collectionview的header和footerview，返回的字典格式类似于@{UICollectionElementKindSectionHeader:[weakself createCollectionHeaderView],UICollectionElementKindSectionFooter:[weakself createCollectionFooterView]}，key必须为UICollectionElementKindSectionHeader，UICollectionElementKindSectionFooter
-typedef NSDictionary *(^ReusableViewConfigureBlock)(NSIndexPath *indexPath);
+typedef void (^ReusableViewConfigureBlock)(NSIndexPath *indexPath,UICollectionReusableView *reusableView,NSString *kind);
 
 - (instancetype)initWithDataArray:(NSArray *)dataArray
 			 cellIDConfigureBlock:(CellIDConfigureBlock)cellIDConfigureBlock
