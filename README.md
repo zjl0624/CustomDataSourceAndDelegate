@@ -1,0 +1,3 @@
+# CustomDataSourceAndDelegate
+分离tableview和collectionview的datasource和delegate在一个单独的类里面
+使用介绍可以参考https://www.jianshu.com/p/eeddcf8e8d6a
